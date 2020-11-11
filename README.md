@@ -1,5 +1,5 @@
 # LinkedInBot-Selenium
-Selenium LinkedIn Bot  Increases the number of contacts on a given topic.
+Selenium LinkedIn bot   Increases the number of contacts on a given topic.
 
 Just type your login as the comment suggests in main.py and password in sec.py. Similarly, you can also set a topic to search in main.py.
 
