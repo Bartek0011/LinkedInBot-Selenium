@@ -21,51 +21,50 @@ class LinkedIn:
         self.driver.find_element_by_xpath('//*[@id="ember16"]/input').send_keys(u'\ue007')
         time.sleep(4)
         self.driver.find_element_by_css_selector("[aria-label='Zobacz wyniki tylko dla Osoby']").click()    
-        self.ul_buttons(1)
+        self.ul_buttons()
 
-    def ul_buttons(self, page_number):
-	if page_number != 1  # next page
-		self.driver.find_element_by_css_selector("[aria-label='Strona {}']".format(page_number)).click()
-	time.sleep(3)
+    def ul_buttons(self):
+	for page_number in range(1, 25):  # go through 25 pages
+		if page_number != 1:  # next page
+			self.driver.find_element_by_css_selector("[aria-label='Strona {}']".format(page_number)).click()
+		time.sleep(3)
 
-        for position in [400, 650, 900, 1150, 900, 650, 400, 0]:
-            self.driver.execute_script("window.scrollTo(0, {})".format(position))  # scroll as human, up and down
-            time.sleep(0.3)
-        time.sleep(1)
+		for position in [400, 650, 900, 1150, 900, 650, 400, 0]:
+		    self.driver.execute_script("window.scrollTo(0, {})".format(position))  # scroll as human, up and down
+		    time.sleep(0.3)
+		time.sleep(1)
 
-        position = 1
-        users_ul = self.driver.find_element_by_xpath('/html/body/div[8]/div[3]/div/div[2]/div/div[2]/div/div/div/ul')
-        for button in users_ul.find_elements_by_tag_name('button'):
+		position = 1
+		users_ul = self.driver.find_element_by_xpath('/html/body/div[8]/div[3]/div/div[2]/div/div[2]/div/div/div/ul')
+		for button in users_ul.find_elements_by_tag_name('button'):
 
-            try:
-                button.click()
-            except RuntimeError:
-                print("no button")
+		    try:
+		        button.click()
+		    except RuntimeError:
+		        print("no button")
 
-            time.sleep(0.5)
-            try:
-                self.driver.find_element_by_css_selector("[aria-label='Wyślij teraz']").click()
-            except RuntimeError:
-                print("there's no Send now")
-            time.sleep(0.5)
-            # try:
-            #     self.driver.find_element_by_css_selector("[aria-label='Dodaj notatkę']").click()
-            # except RuntimeError:
-            #     print("there's no Add note")
-            # time.sleep(0.5)
-            try:
-                self.driver.find_element_by_css_selector("[aria-label='Odrzuć']").click()
-            except RuntimeError:
-                print("there's no Reject")
-            time.sleep(1)
-            position += 1
-            self.driver.execute_script("window.scrollTo(0, {})".format(position * 130))
-            time.sleep(2)
+		    time.sleep(0.5)
+		    try:
+		        self.driver.find_element_by_css_selector("[aria-label='Wyślij teraz']").click()
+		    except RuntimeError:
+		        print("there's no Send now")
+		    time.sleep(0.5)
+		    # try:
+		    #     self.driver.find_element_by_css_selector("[aria-label='Dodaj notatkę']").click()
+		    # except RuntimeError:
+		    #     print("there's no Add note")
+		    # time.sleep(0.5)
+		    try:
+		        self.driver.find_element_by_css_selector("[aria-label='Odrzuć']").click()
+		    except RuntimeError:
+		        print("there's no Reject")
+		    time.sleep(1)
+		    position += 1
+		    self.driver.execute_script("window.scrollTo(0, {})".format(position * 130))
+		    time.sleep(2)
 
         time.sleep(0.4)
-	self.ul_buttons(page_number += 1)
 
 
 bot = LinkedIn('')  # type your username or email here
 bot.invite_new('')  # type yout topic here
-
