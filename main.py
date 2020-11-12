@@ -40,13 +40,13 @@ class LinkedIn:
 
 		    try:
 		        button.click()
-		    except RuntimeError:
+		    except:
 		        print("no button")
 
 		    time.sleep(0.5)
 		    try:
 		        self.driver.find_element_by_css_selector("[aria-label='Wyślij teraz']").click()
-		    except RuntimeError:
+		    except:
 		        print("there's no Send now")
 		    time.sleep(0.5)
 		    # try:
@@ -56,7 +56,7 @@ class LinkedIn:
 		    # time.sleep(0.5)
 		    try:
 		        self.driver.find_element_by_css_selector("[aria-label='Odrzuć']").click()
-		    except RuntimeError:
+		    except:
 		        print("there's no Reject")
 		    time.sleep(1)
 		    position += 1
